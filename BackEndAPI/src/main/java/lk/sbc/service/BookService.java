@@ -10,5 +10,7 @@ public interface BookService {
 
     ArrayList<BookDTO> getAllBooks();
 
+    AuthorBookDTO getBook(String isbn);
 
+    void updateBookPrice(String isbn, double price);
 }

@@ -23,6 +23,18 @@ public class BookController {
         return new ResponseUtil("200", " Success", allBooks);
     }
 
+    @GetMapping(params = {"isbn"})
+    public ResponseUtil getBook(@RequestParam("isbn") String isbn) {
+        AuthorBookDTO authorBookDTO = bookService.getBook(isbn);
+        return new ResponseUtil("200", " Success", authorBookDTO);
+    }
+
+    @PostMapping("/update")
+    public ResponseUtil updateBookPrice(@RequestParam("isbn") String isbn, @RequestParam("price") String price) {
+        bookService.updateBookPrice(isbn, Double.parseDouble(price));
+        return new ResponseUtil("200", " Success", null);
+    }
+
     @PostMapping
     public ResponseUtil addBook(@RequestBody AuthorBookDTO authorBookDTO) {
 //        System.out.println(authorBookDTO);

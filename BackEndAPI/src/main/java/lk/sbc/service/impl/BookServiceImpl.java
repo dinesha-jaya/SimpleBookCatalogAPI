@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -63,5 +64,46 @@ public class BookServiceImpl implements BookService {
     @Override
     public ArrayList<BookDTO> getAllBooks() {
         return null;
+    }
+
+    @Override
+    public AuthorBookDTO getBook(String isbn) {
+        AuthorBookDTO authorBookDTO = new AuthorBookDTO();
+
+        Book book = bookRepo.findByIsbn(isbn);
+
+        long bookId = book.getBookId();
+
+        List<BookHasAuthor> bookHasAuthors = authorRepo.findBookHasAuthors(bookId);
+
+        authorBookDTO.setIsbn(book.getIsbn());
+        authorBookDTO.setTitle(book.getTitle());
+        authorBookDTO.setPrice(book.getPrice());
+
+        ArrayList<AuthorDTO> authorDTOs = new ArrayList<>();
+
+        for (BookHasAuthor bookHasAuthor: bookHasAuthors) {
+            AuthorDTO authorDTO = new AuthorDTO();
+
+            String firstName = bookHasAuthor.getAuthor().getFirstName();
+            String lastName = bookHasAuthor.getAuthor().getLastName();
+
+            authorDTO.setFirstName(firstName);
+            authorDTO.setLastName(lastName);
+
+            authorDTOs.add(authorDTO);
+        }
+
+        authorBookDTO.setAuthorList(authorDTOs);
+
+        return authorBookDTO;
+    }
+
+    @Override
+    public void updateBookPrice(String isbn, double price) {
+        Book book = bookRepo.findByIsbn(isbn);
+        book.setPrice(price);
+        System.out.println(book);
+        bookRepo.save(book);
     }
 }
