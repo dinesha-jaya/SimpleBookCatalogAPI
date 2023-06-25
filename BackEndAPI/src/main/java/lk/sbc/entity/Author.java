@@ -2,10 +2,9 @@ package lk.sbc.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,4 +20,6 @@ public class Author {
     private String firstName;
     private String lastName;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<BookHasAuthor> bookHasAuthors = new ArrayList<>();
 }

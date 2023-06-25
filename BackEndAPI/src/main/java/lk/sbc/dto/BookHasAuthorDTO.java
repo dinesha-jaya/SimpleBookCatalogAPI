@@ -3,7 +3,7 @@ package lk.sbc.dto;
 import lombok.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
 @ToString

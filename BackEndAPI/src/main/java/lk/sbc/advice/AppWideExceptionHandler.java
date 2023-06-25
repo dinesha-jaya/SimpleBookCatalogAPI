@@ -1,6 +1,6 @@
 package lk.sbc.advice;
 
-import lk.rental.util.ResponseUtil;
+import lk.sbc.util.ResponseUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;

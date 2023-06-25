@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-12">
 <!--        <label class="form-label" for="inputBookTitle">Title</label>-->
-        <input class="form-control" id="inputBookTitle" name="inputBookTitle" type="text" placeholder="Title">
+        <input class="form-control" id="inputBookTitle" name="inputBookTitle" type="text" placeholder="Title of the Book">
     </div>
     <div class="col-md-12">
         <!--        <label class="form-label" for="inputBookTitle">Title</label>-->
@@ -75,7 +75,7 @@
     <!--            -->
 
     <div class="col-md-7">
-        <button class="btn btn-primary" id="btnBookAdd" type="button">Add Book</button>
+        <button class="btn btn-primary" id="btnBookAdd" name="btnBookAdd" type="button">Add Book</button>
         <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#bookGetModal" id="btnBookGet" type="button">Get Book</button>
         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#bookUpdateModal" id="btnBookUpdate" type="button">Update Book</button>
         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bookDeleteModal" id="btnBookDelete" type="button">Delete Book</button>
@@ -161,21 +161,21 @@
             divFName.setAttribute("class", "col-md-6");
             divFName.setAttribute("style", "display: inline-block");
             let inputFName = document.createElement("input");
-            inputFName.setAttribute("class", 'form-control');
+            inputFName.setAttribute("class", 'form-control inputAuthorFName');
             inputFName.setAttribute('type', 'text');
             inputFName.setAttribute("placeholder", "First Name");
-            inputFName.setAttribute("id", (`inputAuthorFName${i+1}`));
-            inputFName.setAttribute("name", (`inputAuthorFName${i+1}`));
+            inputFName.setAttribute("id", (`inputAuthorFName${i}`));
+            // inputFName.setAttribute("name", "inputAuthorFName");
 
             let divLName = document.createElement("div");
             divLName.setAttribute("class", "col-md-6");
             divLName.setAttribute("style", "display: inline-block");
             let inputLName = document.createElement("input");
-            inputLName.setAttribute("class", 'form-control');
+            inputLName.setAttribute("class", 'form-control inputAuthorLName');
             inputLName.setAttribute('type', 'text');
             inputLName.setAttribute("placeholder", "Last Name");
-            inputLName.setAttribute("id", (`inputAuthorLName${i+1}`));
-            inputLName.setAttribute("name", (`inputAuthorLName${i+1}`));
+            inputLName.setAttribute("id", (`inputAuthorLName${i}`));
+            // inputLName.setAttribute("class", "inputAuthorLName");
 
             divFName.append(inputFName);
             divLName.append(inputLName);
@@ -183,12 +183,74 @@
             let divF = fragment.appendChild(divFName);
             let divL = fragment.appendChild(divLName);
 
-            console.log(divF);
-            console.log(divL);
+            // console.log(divF);
+            // console.log(divL);
 
             $("#divBookAuthors").append(divF, divL);
         }
     });
+
+    $("#btnBookAdd").click(function () {
+        let authorBook = {
+            title: "",
+            isbn: "",
+            price: 0.0,
+            authorList: []
+        }
+
+        let authors = [];
+
+        let title = $("#inputBookTitle").val();
+        let isbn = $("#inputBookIsbn").val();
+
+        let firstNames = document.querySelectorAll(".inputAuthorFName");
+        let lastNames = document.querySelectorAll(".inputAuthorLName");
+
+        console.log(firstNames);
+        console.log(lastNames);
+
+        for (let i = 0; i < firstNames.length; i++) {
+            let author = {
+                firstName: "",
+                lastName: ""
+            }
+
+            let firstNameNode = document.querySelector(`input#inputAuthorFName${i}`);
+            let lastNameNode = document.querySelector(`input#inputAuthorLName${i}`);
+
+            let firstName = firstNameNode.value;
+            let lastName = lastNameNode.value;
+
+            author.firstName = firstName;
+            author.lastName = lastName;
+
+            authors.push(author);
+        }
+
+        let price = $("#inputBookPrice").val();
+
+        authorBook.title = title;
+        authorBook.isbn = isbn;
+        authorBook.price = parseFloat(price);
+        authorBook.authorList = authors;
+
+        console.log(authorBook);
+
+        $.ajax({
+            url: 'http://localhost:8080/books/book',
+            method: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(authorBook),
+            // dataType: "json",
+            success: function (resp) {
+                alert(resp.message);
+            },
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+        });
+    })
 
     $("#btnBookGet").click(function () {
         let isbn = $("inputBookIsbn").val();

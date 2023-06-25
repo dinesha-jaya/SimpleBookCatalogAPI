@@ -2,10 +2,7 @@ package lk.sbc.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,5 +15,14 @@ public class BookHasAuthor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookHasCarId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bookId")
+    private Book book;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "authorId")
+    private Author author;
+
 
 }
