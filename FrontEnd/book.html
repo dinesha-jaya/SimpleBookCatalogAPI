@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Simple Book Catalog - Book</title>
+</head>
+<body class="container">
+
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+        <a class="d-inline-flex link-body-emphasis text-decoration-none" href="index.html">Simple Book Catalog</a>
+    </div>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a class="nav-link px-2 link-secondary" href="search.html">Home</a></li>
+        <li><a class="nav-link px-2" href="#">Features</a></li>
+        <li><a class="nav-link px-2" href="#">FAQs</a></li>
+        <li><a class="nav-link px-2" href="book.html">Manage Books</a></li>
+    </ul>
+
+    <div class="col-md-3 text-end">
+        <button class="btn btn-outline-primary me-2" type="button">Login</button>
+        <button class="btn btn-primary" type="button">Sign-up</button>
+    </div>
+</header>
+<div class="b-example-divider"></div>
+
+<form class="row g-3" id="newBookForm">
+    <div class="col-md-12">
+        <label class="form-label fw-bolder fs-5" for="newBookForm">Book</label>
+    </div>
+    <div class="col-md-12">
+<!--        <label class="form-label" for="inputBookTitle">Title</label>-->
+        <input class="form-control" id="inputBookTitle" name="inputBookTitle" type="text" placeholder="Title">
+    </div>
+    <div class="col-md-12">
+        <!--        <label class="form-label" for="inputBookTitle">Title</label>-->
+        <input class="form-control" id="inputBookIsbn" name="inputBookIsbn" type="text" placeholder="ISBN">
+    </div>
+    <div>
+    <div class="col-md-1" style="display: inline-block">
+        <label class="form-label">Author(s)</label>
+    </div>
+    <div class="col-md-3" style="display: inline-block">
+        <!--            <label class="form-label" for="inputFirstName">First Name</label>-->
+        <input class="form-control" id="inputAuthorNos" name="inputAuthorNos" type="text" placeholder="Number of Authors">
+    </div>
+    <div style="display: inline-block">
+        <button class="btn btn-primary" id="btnBookAddAuthor" name="btnBookAddAuthor" type="button">+</button>
+    </div>
+    </div>
+    <div id="divBookAuthors">
+<!--        <div class="col-md-5" style="display: inline-block">-->
+<!--&lt;!&ndash;            <label class="form-label" for="inputFirstName">First Name</label>&ndash;&gt;-->
+<!--            <input class="form-control" id="inputFirstName" name="inputFirstName" type="text" placeholder="FirstName">-->
+<!--        </div>-->
+<!--        <div class="col-md-5" style="display: inline-block">-->
+<!--&lt;!&ndash;            <label class="form-label" for="inputLastName">Last Name</label>&ndash;&gt;-->
+<!--            <input class="form-control" id="inputLastName" name="inputLastName" type="text" placeholder="LastName">-->
+<!--        </div>-->
+    </div>
+    <div class="col-md-6">
+        <!--        <label class="form-label" for="inputBookTitle">Title</label>-->
+        <input class="form-control" id="inputBookPrice" name="inputBookPrice" type="text" placeholder="Price Rs.">
+    </div>
+
+
+    <!--                <div><label class="form-label">First Name</label></div>-->
+    <!--                <div><input class="form-control" id="inputBookFirstName" name="inputBookFirstName"-->
+    <!--                            type="text"></div>-->
+    <!--                <div><label class="form-label">Last name</label></div>-->
+    <!--                <div><input class="form-control" id="inputBookLastName" name="inputBookLastName"-->
+    <!--                            type="text"></div>-->
+    <!--            -->
+
+    <div class="col-md-7">
+        <button class="btn btn-primary" id="btnBookAdd" type="button">Add Book</button>
+        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#bookGetModal" id="btnBookGet" type="button">Get Book</button>
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#bookUpdateModal" id="btnBookUpdate" type="button">Update Book</button>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bookDeleteModal" id="btnBookDelete" type="button">Delete Book</button>
+    </div>
+
+    <div class="modal fade" id="bookGetModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="bookGetModalStaticBackdropLabel">Book</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label fw-bolder fs-5" id="getBookMTitle" name="getBookMTitle"></label>
+                    <label class="form-label fw-bolder fs-5" id="getBookMIsbn" name="getBookMIsbn"></label>
+                    <div id="getBookAuthors"></div>
+                    <label class="form-label fw-bolder fs-5" id="getBookMPrice" name="getBookMPrice"></label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+<!--                    <button type="button" class="btn btn-primary">Understood</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="bookUpdateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="bookUpdateModalStaticBackdropLabel">Book</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label fw-bolder fs-5" id="updateBookMTitle" name="updateBookMTitle"></label>
+                    <label class="form-label fw-bolder fs-5" id="updateBookMIsbn" name="updateBookMIsbn"></label>
+                    <input class="form-control" id="updateBookMPrice" name="updateBookMPrice" type="text">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning">Update Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="bookDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="bookDeleteModalStaticBackdropLabel">Delete Book</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label fw-bolder fs-5" id="deleteBookMTitle" name="deleteBookMTitle"></label>
+                    <label class="form-label fw-bolder fs-5" id="deleteBookMIsbn" name="deleteBookMIsbn"></label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Delete Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-3.7.0.min.js"></script>
+<script>
+
+    $('#btnBookAddAuthor').click(function () {
+        let authorNos = $("#inputAuthorNos").val();
+
+        let divAuthors = document.getElementById("divBookAuthors");
+
+        while (divAuthors.hasChildNodes()) {
+            divAuthors.removeChild(divAuthors.lastChild);
+        }
+
+        let fragment = document.createDocumentFragment();
+
+        for (let i = 0; i < authorNos; i++) {
+            let divFName = document.createElement("div");
+            divFName.setAttribute("class", "col-md-6");
+            divFName.setAttribute("style", "display: inline-block");
+            let inputFName = document.createElement("input");
+            inputFName.setAttribute("class", 'form-control');
+            inputFName.setAttribute('type', 'text');
+            inputFName.setAttribute("placeholder", "First Name");
+            inputFName.setAttribute("id", (`inputAuthorFName${i+1}`));
+            inputFName.setAttribute("name", (`inputAuthorFName${i+1}`));
+
+            let divLName = document.createElement("div");
+            divLName.setAttribute("class", "col-md-6");
+            divLName.setAttribute("style", "display: inline-block");
+            let inputLName = document.createElement("input");
+            inputLName.setAttribute("class", 'form-control');
+            inputLName.setAttribute('type', 'text');
+            inputLName.setAttribute("placeholder", "Last Name");
+            inputLName.setAttribute("id", (`inputAuthorLName${i+1}`));
+            inputLName.setAttribute("name", (`inputAuthorLName${i+1}`));
+
+            divFName.append(inputFName);
+            divLName.append(inputLName);
+
+            let divF = fragment.appendChild(divFName);
+            let divL = fragment.appendChild(divLName);
+
+            console.log(divF);
+            console.log(divL);
+
+            $("#divBookAuthors").append(divF, divL);
+        }
+    });
+
+    $("#btnBookGet").click(function () {
+        let isbn = $("inputBookIsbn").val();
+    });
+
+    $("#btnBookUpdate").click(function () {
+        let isbn = $("inputBookIsbn").val();
+    });
+
+    $("#btnBookDelete").click(function () {
+        let isbn = $("inputBookIsbn").val();
+    });
+
+
+
+</script>
+
+</body>
+</html>

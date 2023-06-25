@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Simple Book Catalog - Search Books</title>
+</head>
+<body class="container">
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+        <a class="d-inline-flex link-body-emphasis text-decoration-none" href="index.html">Simple Book Catalog</a>
+    </div>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a class="nav-link px-2 link-secondary" href="search.html">Home</a></li>
+        <li><a class="nav-link px-2" href="#">Features</a></li>
+        <li><a class="nav-link px-2" href="#">FAQs</a></li>
+        <li><a class="nav-link px-2" href="book.html">Manage Books</a></li>
+    </ul>
+
+    <div class="col-md-3 text-end">
+        <button class="btn btn-outline-primary me-2" type="button">Login</button>
+        <button class="btn btn-primary" type="button">Sign-up</button>
+    </div>
+</header>
+<div class="b-example-divider"></div>
+
+<div>
+    <form class="row g-3">
+        <div class="col-md-1">
+            <label class="form-label">Search</label>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select" id="ddSelectCriteria" name="ddSelectCriteria">
+                <option value="">Book catalog</option>
+                <option value="ti">Title</option>
+                <option value="au">Author</option>
+                <option value="al">All</option>
+            </select>
+        </div>
+
+        <div class="col-md-7">
+            <input class="form-control" id="inputSearchKey" name="inputSearchKey" type="text"/>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" type="button" id="btnGoSearch">Go</button>
+        </div>
+    </form>
+</div>
+
+<div class="b-example-divider"></div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col" style="display:none;">Book Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Author Name</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody id="tblBooks">
+    </tbody>
+</table>
+
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-3.7.0.min.js"></script>
+<script>
+
+    $("#btnGoSearch").click(function () {
+        let ddResult = document.getElementById("ddSelectCriteria");
+        let ddText = ddResult.options[ddResult.selectedIndex].text;
+
+        let searchKey = $("#inputSearchKey").val();
+
+
+    })
+
+</script>
+</body>
+</html>
